@@ -22,6 +22,6 @@ public class InvensionFinderTest{
         Integer result = inventionFinder.addAllNonLethalInventions();
 
         assertNotNull(result);
-        assertEquals(result, result > 0);
+        assertEquals(result, new Integer(2));
     }
 }
