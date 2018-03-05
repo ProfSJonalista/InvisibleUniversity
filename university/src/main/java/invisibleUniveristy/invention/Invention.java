@@ -1,6 +1,7 @@
 package invisibleUniveristy.invention;
 
 public class Invention{
+    private int id;
     private String name;
     private boolean deadly;
     private String description;
@@ -13,6 +14,14 @@ public class Invention{
         this.name = name;
         this.description = description;
         this.deadly = deadly;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName(){
