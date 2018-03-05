@@ -1,10 +1,11 @@
 package invisibleUniveristy.invention;
 
 public class Invention{
-    private int id;
+    private Long id;
     private String name;
     private boolean deadly;
     private String description;
+    private Creator creator;
 
     public Invention(){
 
@@ -16,11 +17,11 @@ public class Invention{
         this.deadly = deadly;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -46,5 +47,13 @@ public class Invention{
 
     public void setDescription(String description){
         this.description = description;
+    }
+
+    public Creator getCreator() {
+        return creator;
+    }
+
+    public void setCreator(Creator creator) {
+        this.creator = creator;
     }
 }
