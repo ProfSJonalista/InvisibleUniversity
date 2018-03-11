@@ -52,7 +52,7 @@ public class Tests {
         creatorRepository.updateById(creatorToUpdate.getId());
 
         assertEquals(creatorRepository.getCreatorById(2L), creatorToUpdate);
-        assertThat(creatorToUpdate.getName(), is("Dominika"));
+        assertThat(creatorToUpdate.getSurname(), is("Malinowska"));
     }
 
     @Test
