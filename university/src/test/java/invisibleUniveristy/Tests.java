@@ -97,6 +97,7 @@ public class Tests {
         List<Creator> creators = creatorRepository.getAllCreators();
 
         assertNull(creatorRepository.getCreatorById(1L).getSurname());
+        assertNotNull(creatorRepository.getCreatorById(2L).getSurname());
         assertEquals(true, !creators.isEmpty());
     }
 
