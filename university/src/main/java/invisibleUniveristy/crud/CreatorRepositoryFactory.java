@@ -1,7 +1,18 @@
 package invisibleUniveristy.crud;
 
-public class CreatorRepositoryFactory {
+import java.sql.*;
+
+public class CreatorRepositoryFactory{
     public static ICreatorRepository getInstance(){
-        return null;
+        try {
+            String url = "jdbc:hsqldb:hsql://localhost/workdb";
+            return new CreatorRepositoryImpl(DriverManager.getConnection(url));
+        }
+        catch (SQLException e){
+            System.out.println("-----------CreatorRepositoryFactory--------------");
+            e.printStackTrace();
+            System.out.println("-----------CreatorRepositoryFactory--------------");
+            return null;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package invisibleUniveristy;
 
+import invisibleUniveristy.crud.CreatorRepositoryFactory;
 import invisibleUniveristy.crud.ICreatorRepository;
 import invisibleUniveristy.invention.Creator;
 import invisibleUniveristy.invention.Invention;
@@ -11,9 +12,15 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.core.Is;
+import org.hamcrest.core.IsNot;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.JUnit4;
 
+@RunWith(JUnit4.class)
 public class Tests {
 
     ICreatorRepository creatorRepository;
@@ -48,16 +55,21 @@ public class Tests {
     public void updateTest(){
         Creator creatorToUpdate = creatorRepository.getCreatorById(2L);
 
+        creatorToUpdate.setName("Juanita");
         creatorToUpdate.setSurname("Malinowska");
-        creatorRepository.updateById(creatorToUpdate.getId());
+        creatorRepository.updateById(creatorToUpdate);
 
-        assertEquals(creatorRepository.getCreatorById(2L), creatorToUpdate);
+        assertEquals(creatorRepository.getCreatorById(2L).getSurname(), creatorToUpdate.getSurname());
         assertThat(creatorToUpdate.getSurname(), is("Malinowska"));
+        assertThat(creatorToUpdate.getName(), is("Juanita"));
+
+        Creator creator = creatorRepository.getCreatorById(3L);
+        assertThat(creator.getSurname(), not("Malinowska"));
     }
 
     @Test
     public void findByIdTest(){
-        Creator creator = creatorRepository.getCreatorById(1L);
+        Creator creator = creatorRepository.getCreatorById(0L);
 
         assertNotNull(creator);
         assertEquals("Jan Miętki", creator.getName() + " " + creator.getSurname());
@@ -68,7 +80,8 @@ public class Tests {
         List<Creator> allCreators = creatorRepository.getAllCreators();
 
         assertNotNull(allCreators);
-        assertThat(allCreators, hasItem(creatorRepository.getCreatorById(1L)));
+        Creator creator = allCreators.get(3);
+        assertNotNull(creator);
 
         try{
             Creator creatorToCatch = allCreators.get(0);
@@ -80,11 +93,17 @@ public class Tests {
     @Test
     public void deleteByIdTest(){
         creatorRepository.deleteById(1L);
-        assertNull(creatorRepository.getCreatorById(1L));
+
+        List<Creator> creators = creatorRepository.getAllCreators();
+
+        assertNull(creatorRepository.getCreatorById(1L).getSurname());
+        assertEquals(true, !creators.isEmpty());
     }
 
     @Before
     public void initRepository(){
+        creatorRepository = CreatorRepositoryFactory.getInstance();
+
         Creator firstCreator = new Creator(1L, "Jan", "Miętki");
         Creator secondCreator = new Creator(2L, "Dominika", "Parawska");
         Creator thirdCreator = new Creator(3L, "Karol", "Sulżyński");
@@ -96,5 +115,10 @@ public class Tests {
         creatorRepository.add(thirdCreator);
         creatorRepository.add(fourthCreator);
         creatorRepository.add(fifthCreator);
+    }
+
+    @After
+    public void dropRepository(){
+        creatorRepository.dropTable();
     }
 }
