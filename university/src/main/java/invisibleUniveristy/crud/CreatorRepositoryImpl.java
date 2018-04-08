@@ -20,6 +20,10 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
     private PreparedStatement getCreatorByIdStatement;
     private PreparedStatement dropTableStatement;
 
+    public CreatorRepositoryImpl(){
+
+    }
+
     public CreatorRepositoryImpl(Connection connection) throws SQLException {
         this.connection = connection;
         if (!isDatabaseReady()) {
