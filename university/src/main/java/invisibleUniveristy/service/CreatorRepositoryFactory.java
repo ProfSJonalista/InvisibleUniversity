@@ -1,4 +1,4 @@
-package invisibleUniveristy.crud;
+package invisibleUniveristy.service;
 
 import java.sql.*;
 

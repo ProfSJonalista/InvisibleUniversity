@@ -1,9 +1,9 @@
 package invisibleUniveristy;
 
-import invisibleUniveristy.crud.CreatorRepositoryFactory;
-import invisibleUniveristy.crud.ICreatorRepository;
-import invisibleUniveristy.invention.Creator;
-import invisibleUniveristy.invention.Invention;
+import invisibleUniveristy.service.CreatorRepositoryFactory;
+import invisibleUniveristy.service.ICreatorRepository;
+import invisibleUniveristy.domain.Creator;
+import invisibleUniveristy.domain.Invention;
 
 import static org.hamcrest.CoreMatchers.*;
 

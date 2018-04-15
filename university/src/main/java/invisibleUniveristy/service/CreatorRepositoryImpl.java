@@ -1,13 +1,12 @@
-package invisibleUniveristy.crud;
+package invisibleUniveristy.service;
 
-import invisibleUniveristy.invention.Creator;
+import invisibleUniveristy.domain.Creator;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CreatorRepositoryImpl implements ICreatorRepository {

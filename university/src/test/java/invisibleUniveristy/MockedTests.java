@@ -1,8 +1,8 @@
 package invisibleUniveristy;
 
-import invisibleUniveristy.crud.CreatorRepositoryImpl;
-import invisibleUniveristy.crud.ICreatorRepository;
-import invisibleUniveristy.invention.Creator;
+import invisibleUniveristy.service.CreatorRepositoryImpl;
+import invisibleUniveristy.service.ICreatorRepository;
+import invisibleUniveristy.domain.Creator;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;

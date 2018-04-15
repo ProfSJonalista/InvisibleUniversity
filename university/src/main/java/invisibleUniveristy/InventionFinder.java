@@ -2,7 +2,7 @@ package invisibleUniveristy;
 
 import java.util.ArrayList;
 
-import invisibleUniveristy.invention.Invention;
+import invisibleUniveristy.domain.Invention;
 
 public class InventionFinder{
     ArrayList<Invention> arr;

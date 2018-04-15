@@ -1,4 +1,4 @@
-package invisibleUniveristy.invention;
+package invisibleUniveristy.domain;
 
 public class Creator {
     private Long id;
