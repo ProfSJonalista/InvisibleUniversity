@@ -13,12 +13,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -45,7 +45,7 @@ public class MockedTests {
     PreparedStatement getByIdStatementMock;
 
     @Before
-    public void setupDatabase() throws SQLException{
+    public void setupDatabase() throws SQLException {
         Creator creator1 = new Creator(1L, "Gracjan", "Roztocki");
         Creator creator2 = new Creator(2L, "Pablo", "Escobar");
 
@@ -70,7 +70,7 @@ public class MockedTests {
     }
 
     @Test
-    public void checkAdding() throws Exception{
+    public void checkAdding() throws Exception {
         when(insertStatementMock.executeUpdate()).thenReturn(1);
 
         Creator creator = new Creator(3L, "Karolina", "Radziecka");
@@ -80,18 +80,9 @@ public class MockedTests {
         verify(insertStatementMock).executeUpdate();
     }
 
-    @Test
-    public void checkUpdate() throws Exception{
-        when(updateStatementMock.executeUpdate()).thenReturn(1);
-
-        Creator creatorToUpdate = new Creator(2L, "Wacław", "Parumski");
-        assertEquals(1, creatorRepository.updateById(creatorToUpdate));
-
-    }
-
     @Ignore
     @Test
-    public void checkGetById() throws Exception{
+    public void checkGetById() throws Exception {
         when(getByIdStatementMock.executeUpdate()).thenReturn(1);
 
         Creator creator = creatorRepository.getCreatorById(2L);
@@ -123,5 +114,61 @@ public class MockedTests {
     public void checkDelete() throws SQLException {
         when(deleteStatementMock.executeUpdate()).thenReturn(1);
         assertEquals(1, creatorRepository.deleteById(1L));
+    }
+
+    @Test
+    public void checkUpdate() throws Exception {
+        when(updateStatementMock.executeUpdate()).thenReturn(1);
+
+        Creator creatorToUpdate = new Creator(2L, "Wacław", "Parumski");
+        assertEquals(1, creatorRepository.updateById(creatorToUpdate));
+
+    }
+
+    abstract class AbstractResultSet implements ResultSet {
+        int i = 0;
+
+        @Override
+        public int getInt(String s) throws SQLException {
+            return 1;
+        }
+
+        @Override
+        public String getString(String columnLabel) throws SQLException {
+            switch (columnLabel) {
+                case "name":
+                    return "Jan";
+                case "surname":
+                    return "Miętki";
+                default:
+                    return "";
+            }
+        }
+
+        @Override
+        public boolean next() throws SQLException {
+            if (i == 1)
+                return false;
+            i++;
+            return true;
+        }
+    }
+
+    @Test
+    public void checkGetting() throws Exception {
+        AbstractResultSet mockedResultSet = mock(AbstractResultSet.class);
+        when(mockedResultSet.next()).thenCallRealMethod();
+        when(mockedResultSet.getInt("id")).thenCallRealMethod();
+        when(mockedResultSet.getString("name")).thenCallRealMethod();
+        when(mockedResultSet.getString("surname")).thenCallRealMethod();
+        when(getByIdStatementMock.executeQuery()).thenReturn(mockedResultSet);
+
+        assertEquals(1, creatorRepository.getAllCreators().size());
+
+        verify(getByIdStatementMock, times(1)).executeQuery();
+        verify(mockedResultSet, times(1)).getInt("id");
+        verify(mockedResultSet, times(1)).getString("name");
+        verify(mockedResultSet, times(1)).getString("surname");
+        verify(mockedResultSet, times(2)).next();
     }
 }
