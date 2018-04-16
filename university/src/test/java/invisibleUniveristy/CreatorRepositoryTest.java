@@ -5,13 +5,14 @@ import invisibleUniveristy.service.Creator.CreatorRepositoryImpl;
 import invisibleUniveristy.service.Creator.ICreatorRepository;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.Assert.*;
-
+@Ignore
 public class CreatorRepositoryTest {
     ICreatorRepository creatorRepository;
 
