@@ -1,8 +1,8 @@
-package invisibleUniveristy;
+package invisibleuniversity;
 
-import invisibleUniveristy.service.Creator.CreatorRepositoryImpl;
-import invisibleUniveristy.service.Creator.ICreatorRepository;
-import invisibleUniveristy.domain.Creator;
+import invisibleuniversity.service.CreatorRepositoryImpl;
+import invisibleuniversity.service.ICreatorRepository;
+import invisibleuniversity.domain.Creator;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -213,5 +213,6 @@ public class MockedTests {
     public void checkDelete() throws SQLException {
         when(deleteStatementMock.executeUpdate()).thenReturn(1);
         assertEquals(1, creatorRepository.deleteById(1L));
+        verify(deleteStatementMock, times(1)).executeUpdate();
     }
 }

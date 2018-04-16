@@ -1,4 +1,4 @@
-package invisibleUniveristy.configuration;
+package invisibleuniversity.configuration;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebMvc // tak jak w XML: <mvc:annotation-driven />
-@ComponentScan({"invisibleUniversity"})
+@ComponentScan({"invisibleuniversity"})
 public class RestConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> messageConverters) {

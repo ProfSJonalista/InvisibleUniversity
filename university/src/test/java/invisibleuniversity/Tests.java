@@ -1,9 +1,9 @@
-package invisibleUniveristy;
+package invisibleuniversity;
 
-import invisibleUniveristy.service.Creator.CreatorRepositoryFactory;
-import invisibleUniveristy.service.Creator.ICreatorRepository;
-import invisibleUniveristy.domain.Creator;
-import invisibleUniveristy.domain.Invention;
+import invisibleuniversity.service.CreatorRepositoryFactory;
+import invisibleuniversity.service.ICreatorRepository;
+import invisibleuniversity.domain.Creator;
+import invisibleuniversity.domain.Invention;
 
 import static org.hamcrest.CoreMatchers.*;
 
@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import invisibleUniveristy.service.Invention.InventionFinder;
+import invisibleuniversity.service.InventionFinder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

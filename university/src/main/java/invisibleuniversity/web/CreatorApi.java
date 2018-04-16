@@ -1,7 +1,8 @@
-package invisibleUniveristy.web;
+package invisibleuniversity.web;
 
-import invisibleUniveristy.domain.Creator;
-import invisibleUniveristy.service.Creator.ICreatorRepository;
+import invisibleuniversity.domain.Creator;
+import invisibleuniversity.service.CreatorRepositoryFactory;
+import invisibleuniversity.service.ICreatorRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -18,18 +19,15 @@ public class CreatorApi {
 
     @RequestMapping("/")
     public String index() {
+        //creatorRepository = CreatorRepositoryFactory.getInstance();
         return "This is non rest, just checking if everything works.";
     }
 
     @RequestMapping(value = "/creators", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Creator> getCreators(@RequestParam("filter") String f) throws SQLException {
+    public List<Creator> getCreators() throws SQLException {
         List<Creator> creators = new LinkedList<>();
-        for(Creator c : creatorRepository.getAllCreators()){
-            if(c.getSurname().contains(f)){
-                creators.add(c);
-            }
-        }
+        creators.addAll(creatorRepository.getAllCreators());
 
         return creators;
     }
@@ -43,6 +41,16 @@ public class CreatorApi {
     @RequestMapping(value = "/creator/{id}", method = RequestMethod.DELETE)
     @ResponseBody
     public Long deleteCreator(@PathVariable("id") Long id){
-        return new Long(creatorRepository.deleteById(id));
+        return (long) creatorRepository.deleteById(id);
+    }
+
+    @RequestMapping(value = "/creator", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Long addAccount(@RequestBody Creator c) {
+        return (long) creatorRepository.add(c);
+    }
+
+    @RequestMapping(value = "/creator", method = RequestMethod.PUT)
+    public Long updateAccount(@RequestBody Creator c) throws SQLException {
+        return (long) creatorRepository.updateById(c);
     }
 }

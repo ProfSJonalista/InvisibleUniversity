@@ -1,6 +1,7 @@
-package invisibleUniveristy.service.Creator;
+package invisibleuniversity.service;
 
-import invisibleUniveristy.domain.Creator;
+import invisibleuniversity.domain.Creator;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class CreatorRepositoryImpl implements ICreatorRepository {
     private Connection connection;
 

@@ -1,8 +1,8 @@
-package invisibleUniveristy;
+package invisibleuniversity;
 
-import invisibleUniveristy.domain.Creator;
-import invisibleUniveristy.service.Creator.CreatorRepositoryImpl;
-import invisibleUniveristy.service.Creator.ICreatorRepository;
+import invisibleuniversity.domain.Creator;
+import invisibleuniversity.service.CreatorRepositoryImpl;
+import invisibleuniversity.service.ICreatorRepository;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;

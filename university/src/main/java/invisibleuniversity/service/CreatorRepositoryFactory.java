@@ -1,4 +1,4 @@
-package invisibleUniveristy.service.Creator;
+package invisibleuniversity.service;
 
 import java.sql.*;
 

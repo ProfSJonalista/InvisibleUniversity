@@ -1,6 +1,6 @@
-package invisibleUniveristy.service.Creator;
+package invisibleuniversity.service;
 
-import invisibleUniveristy.domain.Creator;
+import invisibleuniversity.domain.Creator;
 
 import java.sql.Connection;
 import java.sql.SQLException;

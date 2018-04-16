@@ -1,8 +1,8 @@
-package invisibleUniveristy.service.Invention;
+package invisibleuniversity.service;
 
 import java.util.ArrayList;
 
-import invisibleUniveristy.domain.Invention;
+import invisibleuniversity.domain.Invention;
 
 public class InventionFinder{
     ArrayList<Invention> arr;
