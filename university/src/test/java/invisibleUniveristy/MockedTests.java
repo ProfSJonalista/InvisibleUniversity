@@ -67,12 +67,13 @@ public class MockedTests {
     public void checkUpdate() throws Exception {
         Creator creator = new Creator(1L, "Jan", "Radziecki");
         doReturn(creator).when(creatorRepositoryMock).getCreatorById(1L);
-        Creator creatorToUpdate = creatorRepositoryMock.getCreatorById(1L);
-        creatorToUpdate.setName("Jakub");
-        creatorRepository.updateById(creatorToUpdate);
 
         Creator creator1 = new Creator(2L, "Michał", "Targosiński");
         doReturn(creator1).when(creatorRepositoryMock).getCreatorById(2L);
+
+        Creator creatorToUpdate = creatorRepositoryMock.getCreatorById(1L);
+        creatorToUpdate.setName("Jakub");
+        creatorRepository.updateById(creatorToUpdate);
 
         assertThat(creatorRepositoryMock.getCreatorById(1L).getName(), is(creatorToUpdate.getName()));
         assertEquals(creatorRepositoryMock.getCreatorById(1L).getName(), creatorToUpdate.getName());
