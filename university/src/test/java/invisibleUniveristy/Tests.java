@@ -1,7 +1,7 @@
 package invisibleUniveristy;
 
-import invisibleUniveristy.service.CreatorRepositoryFactory;
-import invisibleUniveristy.service.ICreatorRepository;
+import invisibleUniveristy.service.Creator.CreatorRepositoryFactory;
+import invisibleUniveristy.service.Creator.ICreatorRepository;
 import invisibleUniveristy.domain.Creator;
 import invisibleUniveristy.domain.Invention;
 
@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import invisibleUniveristy.service.Invention.InventionFinder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

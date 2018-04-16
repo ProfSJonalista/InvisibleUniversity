@@ -1,10 +1,9 @@
 package invisibleUniveristy;
 
-import invisibleUniveristy.service.CreatorRepositoryImpl;
-import invisibleUniveristy.service.ICreatorRepository;
+import invisibleUniveristy.service.Creator.CreatorRepositoryImpl;
+import invisibleUniveristy.service.Creator.ICreatorRepository;
 import invisibleUniveristy.domain.Creator;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
@@ -67,15 +66,19 @@ public class MockedTests {
     @Test
     public void checkUpdate() throws Exception {
         Creator creator = new Creator(1L, "Jan", "Radziecki");
-        doReturn(creator).when(creatorRepositoryMock).getCreatorById(isA(long.class));
-        Creator creatorToUpdate = creatorRepositoryMock.getCreatorById(2L);
+        doReturn(creator).when(creatorRepositoryMock).getCreatorById(1L);
+        Creator creatorToUpdate = creatorRepositoryMock.getCreatorById(1L);
         creatorToUpdate.setName("Jakub");
         creatorRepository.updateById(creatorToUpdate);
 
-        assertThat(creatorRepositoryMock.getCreatorById(2L).getName(), is(creatorToUpdate.getName()));
-        assertEquals(creatorRepositoryMock.getCreatorById(2L).getName(), creatorToUpdate.getName());
+        Creator creator1 = new Creator(2L, "Michał", "Targosiński");
+        doReturn(creator1).when(creatorRepositoryMock).getCreatorById(2L);
+
+        assertThat(creatorRepositoryMock.getCreatorById(1L).getName(), is(creatorToUpdate.getName()));
+        assertEquals(creatorRepositoryMock.getCreatorById(1L).getName(), creatorToUpdate.getName());
         verify(updateStatementMock, times(1)).setString(1, "Jakub");
         verify(updateStatementMock, times(1)).setString(2, "Radziecki");
+        assertThat(creatorRepositoryMock.getCreatorById(2L).getName(), not(creatorRepositoryMock.getCreatorById(1L).getName()));
         verify(updateStatementMock).executeUpdate();
     }
 

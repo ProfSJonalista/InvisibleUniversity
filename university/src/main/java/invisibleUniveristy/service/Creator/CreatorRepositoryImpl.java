@@ -1,4 +1,4 @@
-package invisibleUniveristy.service;
+package invisibleUniveristy.service.Creator;
 
 import invisibleUniveristy.domain.Creator;
 

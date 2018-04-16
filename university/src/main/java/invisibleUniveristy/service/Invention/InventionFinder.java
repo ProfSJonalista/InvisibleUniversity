@@ -1,4 +1,4 @@
-package invisibleUniveristy;
+package invisibleUniveristy.service.Invention;
 
 import java.util.ArrayList;
 

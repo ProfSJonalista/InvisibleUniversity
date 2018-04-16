@@ -1,4 +1,4 @@
-package invisibleUniveristy.service;
+package invisibleUniveristy.service.Creator;
 
 import java.sql.*;
 
@@ -9,9 +9,7 @@ public class CreatorRepositoryFactory{
             return new CreatorRepositoryImpl(DriverManager.getConnection(url));
         }
         catch (SQLException e){
-            System.out.println("-----------CreatorRepositoryFactory--------------");
             e.printStackTrace();
-            System.out.println("-----------CreatorRepositoryFactory--------------");
             return null;
         }
     }
