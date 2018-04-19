@@ -3,10 +3,7 @@ package invisibleuniversity.service;
 import invisibleuniversity.domain.Creator;
 import org.springframework.stereotype.Component;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +18,12 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
     private PreparedStatement getCreatorByIdStatement;
     private PreparedStatement dropTableStatement;
 
-    public CreatorRepositoryImpl(){
-
+    public CreatorRepositoryImpl() throws SQLException {
+        this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb");
+        if (!isDatabaseReady()) {
+            createTables();
+        }
+        this.setConnection(this.connection);
     }
 
     public CreatorRepositoryImpl(Connection connection) throws SQLException {
@@ -85,10 +86,10 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
     @Override
     public List<Creator> getAllCreators() {
         List<Creator> creators = new ArrayList<>();
-        try{
+        try {
             ResultSet rs = getAllCreatorsStatement.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 Creator creator = new Creator();
 
                 creator.setId(rs.getLong("id"));
@@ -97,7 +98,7 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
 
                 creators.add(creator);
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }
 
@@ -107,11 +108,11 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
     @Override
     public int add(Creator creator) {
         int count = 0;
-        try{
+        try {
             addCreatorStatement.setString(1, creator.getName());
             addCreatorStatement.setString(2, creator.getSurname());
             count = addCreatorStatement.executeUpdate();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }
         return count;
@@ -121,16 +122,16 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
     public Creator getCreatorById(Long id) {
         Creator creator = new Creator();
 
-        try{
+        try {
             getCreatorByIdStatement.setLong(1, id);
             ResultSet rs = getCreatorByIdStatement.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 creator.setId(rs.getLong("id"));
                 creator.setName(rs.getString("name"));
                 creator.setSurname(rs.getString("surname"));
             }
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }
 
@@ -143,8 +144,7 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
         try {
             deleteCreatorStatement.setLong(1, id);
             count = deleteCreatorStatement.executeUpdate();
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }
         return count;
@@ -159,15 +159,15 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
             updateCreatorStatement.setString(1, creator.getName());
             updateCreatorStatement.setString(2, creator.getSurname());
             count = updateCreatorStatement.executeUpdate();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
         }
         return count;
     }
 
     @Override
-    public void dropTable(){
-        try{
+    public void dropTable() {
+        try {
             dropTableStatement.executeUpdate();
         } catch (SQLException e) {
             throw new IllegalStateException(e.getMessage() + "\n" + e.getStackTrace().toString());
