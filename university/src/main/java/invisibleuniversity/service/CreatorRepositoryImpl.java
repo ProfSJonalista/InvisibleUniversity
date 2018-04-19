@@ -20,14 +20,15 @@ public class CreatorRepositoryImpl implements ICreatorRepository {
 
     public CreatorRepositoryImpl() throws SQLException {
         this.connection = DriverManager.getConnection("jdbc:hsqldb:hsql://localhost/workdb");
-        if (!isDatabaseReady()) {
-            createTables();
-        }
-        this.setConnection(this.connection);
+        checkDatabaseAndSetConnection(this.connection);
     }
 
     public CreatorRepositoryImpl(Connection connection) throws SQLException {
         this.connection = connection;
+        checkDatabaseAndSetConnection(this.connection);
+    }
+
+    void checkDatabaseAndSetConnection(Connection connection) throws SQLException{
         if (!isDatabaseReady()) {
             createTables();
         }
