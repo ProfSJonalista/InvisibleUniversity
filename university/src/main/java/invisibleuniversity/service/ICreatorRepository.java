@@ -18,4 +18,5 @@ public interface ICreatorRepository {
     int deleteById(Long id);
     int updateById(Creator creator);
     void dropTable();
+    String introduceSelf();
 }

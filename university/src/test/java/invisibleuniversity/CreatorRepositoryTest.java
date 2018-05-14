@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
 @Ignore
 public class CreatorRepositoryTest {
     ICreatorRepository creatorRepository;

@@ -4,6 +4,7 @@ import invisibleuniversity.service.CreatorRepositoryImpl;
 import invisibleuniversity.service.ICreatorRepository;
 import invisibleuniversity.domain.Creator;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
@@ -18,6 +19,7 @@ import java.sql.SQLException;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
+@Ignore
 @RunWith(MockitoJUnitRunner.class)
 public class MockedTests {
 

@@ -4,3 +4,4 @@ script:
 - cd university; bash scripts/server.sh
 - cd university; mvn test
 - cd university; mvn test -Dtest=MockedTests
+- cd university; mvn test -Dtest=CreatorTests
