@@ -1,22 +1,30 @@
 package invisibleuniversity.domain;
 
-public class Invention{
+import javax.persistence.*;
+
+@Entity
+@NamedQueries({
+        @NamedQuery(name = "Invention.unsold", query = "SELECT i FROM Invention i WHERE i.sold = false")
+})
+public class Invention {
     private Long id;
     private String name;
     private boolean deadly;
     private String description;
-    private Creator creator;
+    private boolean sold = false;
 
-    public Invention(){
+    public Invention() {
 
     }
 
-    public Invention(String name, String description, boolean deadly){
+    public Invention(String name, String description, boolean deadly) {
         this.name = name;
         this.description = description;
         this.deadly = deadly;
     }
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public Long getId() {
         return id;
     }
@@ -25,35 +33,35 @@ public class Invention{
         this.id = id;
     }
 
-    public String getName(){
+    public String getName() {
         return this.name;
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
 
-    public boolean isDeadly(){
+    public boolean isDeadly() {
         return this.deadly;
     }
 
-    public void setDeadly(boolean deadly){
+    public void setDeadly(boolean deadly) {
         this.deadly = deadly;
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return this.description;
     }
 
-    public void setDescription(String description){
+    public void setDescription(String description) {
         this.description = description;
     }
 
-    public Creator getCreator() {
-        return creator;
+    public boolean isSold() {
+        return sold;
     }
 
-    public void setCreator(Creator creator) {
-        this.creator = creator;
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 }

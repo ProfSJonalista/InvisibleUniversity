@@ -1,4 +1,4 @@
-package invisibleuniversity;
+package invisibleuniversity.helper;
 
 import java.io.FileOutputStream;
 import java.sql.Connection;
