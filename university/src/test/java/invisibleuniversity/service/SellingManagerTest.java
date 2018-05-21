@@ -14,7 +14,7 @@ import java.util.List;
 
 @Ignore
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:/resources/beans.xml"})
+@ContextConfiguration(locations = {"classpath:/beans.xml"})
 @Rollback
 //@Commit
 @Transactional(transactionManager = "txManager")

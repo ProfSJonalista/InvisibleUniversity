@@ -3,10 +3,4 @@
     <INVENTION ID="4" NAME="Gamepad" DESCRIPTION="Device to play games" DEADLY="false" SOLD="false"/>
     <INVENTION ID="5" NAME="Chainsaw" DESCRIPTION="Used to cutting trees and unliving the undeads" DEADLY="true" SOLD="false"/>
     <INVENTION ID="6" NAME="Highly advanced AI" DESCRIPTION="Cool computer to say sorry" DEADLY="false" SOLD="false"/>
-    <CREATOR ID="4" NAME="Krystian" SURNAME="Dzięcielski" NICKNAME="terminator"/>
-    <CREATOR ID="5" NAME="Marek" SURNAME="Horski" NICKNAME="xsaxsx"/>
-    <CREATOR ID="6" NAME="Jan" SURNAME="Mietki" NICKNAME="ProfSJonalista"/>
-    <CREATOR_INVENTION INVENTIONS_ID="4" CREATOR_ID="4"/>
-    <CREATOR_INVENTION INVENTIONS_ID="5" CREATOR_ID="6"/>
-    <CREATOR_INVENTION INVENTIONS_ID="6" CREATOR_ID="6"/>
 </dataset>
