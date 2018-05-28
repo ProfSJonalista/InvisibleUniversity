@@ -1,5 +1,6 @@
 package invisibleuniversity;
 
+import static org.junit.Assert.assertEquals;
 import org.openqa.selenium.support.ui.Select;
 import org.junit.After;
 import org.junit.Before;
@@ -27,14 +28,50 @@ public class SeleniumTests {
     }
 
     @Test
-    public void registerTest() throws Exception {
+    public void invalidRegisterTest() throws Exception {
         driver.get(baseUrl);
         signIn();
         createAccount("Shoot@MyFace.com");
-        fillForm("Mr", "Facy", "McShootFace", "Admin 1", "3 January 1984",
-                "Bakery Street 5", "Iowa City", "Iowa", "00000","444433322", "address");
+        if (checkIfErrorExist("#create_account_error")) {
+            createAccount("Shoot@Me");
+
+            if (checkIfErrorExist("#create_account_error")) {
+                create();
+            }
+        } else {
+            create();
+        }
+        register();
+
+        if(checkIfErrorExist("#center_column > div")){
+            String alertMessage = driver.findElement(By.cssSelector("#center_column > div")).getText();
+            if(alertMessage.contains("firstname") || alertMessage.contains("lastname") || alertMessage.contains("passwd")){
+                fillPersonalInformation("Facy", "McShootFace", "Admin 1", "3 January 1984");
+            }
+
+            if(alertMessage.contains("addres1") || alertMessage.contains("city")){
+                fillAddress("Bakery Street 5", "Iowa City", "Iowa", "00000", "000000000", "address");
+            }
+        }
+
+        register();
+
+        assertEquals(true, driver.findElement(By.linkText("Sign out")).isDisplayed());
+
+        Thread.sleep(3000);
+        signOut();
     }
 
+    private void create() {
+        createAccount("Shoot@MeRightNow.com");
+        fillForm("Mr", "", "McShootFace", "Admin 1", "3 January 1984",
+                "Bakery Street 5", "", "Iowa", "00000", "", "address");
+    }
+
+    private boolean checkIfErrorExist(String cssSelector) throws Exception {
+        Thread.sleep(3000);
+        return driver.findElement(By.cssSelector(cssSelector)).isDisplayed();
+    }
     private void signIn() {
         driver.findElement(By.linkText("Sign in")).click();
     }
@@ -50,7 +87,6 @@ public class SeleniumTests {
         fillGender(title);
         fillPersonalInformation(firstName, lastName, password, dateOfBirth);
         fillAddress(address, city, state, postalCode, mobilePhone, addressAlias);
-        register();
     }
 
     private void fillGender(String title) {
@@ -66,7 +102,7 @@ public class SeleniumTests {
         }
     }
 
-    private void fillPersonalInformation(String firstName, String lastName, String password, String dateOfBirth){
+    private void fillPersonalInformation(String firstName, String lastName, String password, String dateOfBirth) {
         driver.findElement(By.id("customer_firstname")).clear();
         driver.findElement(By.id("customer_firstname")).sendKeys(firstName);
 
@@ -102,8 +138,12 @@ public class SeleniumTests {
         driver.findElement(By.id("alias")).sendKeys(addressAlias);
     }
 
-    private void register(){
+    private void register() {
         driver.findElement(By.id("submitAccount")).click();
+    }
+
+    private void signOut(){
+        driver.findElement(By.linkText("Sign out")).click();
     }
 
     @After
