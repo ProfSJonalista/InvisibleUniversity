@@ -1,6 +1,8 @@
 package invisibleuniversity;
 
 import static org.junit.Assert.assertEquals;
+
+import org.junit.Ignore;
 import org.openqa.selenium.support.ui.Select;
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
-
+@Ignore
 public class SeleniumTests {
     private WebDriver driver;
     private String baseUrl;
